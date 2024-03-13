@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Server2\**" />
+    <EmbeddedResource Remove="Server2\**" />
+    <None Remove="Server2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Server1\Database\" />
+    <Folder Include="Server1\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Server1\Database\primary.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

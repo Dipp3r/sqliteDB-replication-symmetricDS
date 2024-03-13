@@ -1,0 +1,32 @@
+#server cmd
+dbimport --engine pri-000 --format XML --alter-case ../samples/create_sample.xml
+symadmin --engine pri-000 create-sym-tables
+dbimport --engine pri-000 ../samples/insert_sample.sql
+sym --engine pri-000 --port 31415
+
+
+
+#client cmd
+dbimport --engine sec-001 --format XML --alter-case ../samples/create_sample.xml
+symadmin --engine sec-001 create-sym-tables
+sym --engine sec-001 --port 8080
+
+
+
+#reload cmd
+symadmin --engine pri-000 reload-node 001
+
+
+
+#sqlite cmd
+sqlite3 
+.open C:\Users\INARK12\Downloads\symmetric-server-3.15.3\pri-000\primary.sqlite
+.open C:\Users\INARK12\Downloads\symmetric-server-3.15.3\sec-001\secondary.sqlite
+.database
+insert into item values(1234,'haha');
+delete from item where item_id = 1234;
+
+
+
+
+

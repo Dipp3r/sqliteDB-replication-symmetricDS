@@ -1,0 +1,9 @@
+symmetric-server/tmp/
+symmetric-server/logs/
+symmetric-server/patches/
+SQLiteReplicaServer1/.vs
+SQLiteReplicaServer1/bin
+SQLiteReplicaServer1/obj
+SQLiteReplicaServer2/.vs
+SQLiteReplicaServer2/bin
+SQLiteReplicaServer2/obj
