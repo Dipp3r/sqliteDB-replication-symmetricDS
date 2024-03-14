@@ -19,9 +19,9 @@ public partial class PrimaryContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=.\\Server1\\Database\\primary.sqlite");
+        optionsBuilder.UseSqlite("Data Source=C:\\Users\\INARK12\\OneDrive - ABB\\Documents\\SQLiteReplicatonDemo\\SQLiteReplicaServer1\\Server1\\Database\\primary.sqlite");
     }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Alarm>(entity =>
