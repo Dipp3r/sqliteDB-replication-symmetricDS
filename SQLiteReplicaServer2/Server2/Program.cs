@@ -1,4 +1,34 @@
 ﻿using SQLiteReplicaServer2.Server2.Models;
+using Microsoft.EntityFrameworkCore;
+
+void checkConnection()
+{
+    try
+    {
+        using var dbContext = new SecondaryContext();
+        var connection = dbContext.Database.GetDbConnection();
+        if (connection.State != System.Data.ConnectionState.Open)
+        {
+            connection.Open();
+        }
+        using var command = connection.CreateCommand();
+        command.CommandText = "PRAGMA database_list;";
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                Console.WriteLine($"{reader.GetName(i)}: {reader[i]}");
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+    }
+}
+
+
 
 while (true)
 {
@@ -10,14 +40,14 @@ while (true)
         {
             case 1:
                 List<Alarm> alarmList = ReadAlarm();
-                Console.WriteLine("----List of alarms----");
+                Console.WriteLine("\n----List of alarms----");
                 foreach (var alarm in alarmList)
                 {
                     Console.WriteLine($"Alarm Id: {alarm.AlarmId}, Name: {alarm.Name}");
                 }
                 break;
             case 2:
-                Console.Write("Enter the name of the alarm: ");
+                Console.Write("\nEnter the name of the alarm: ");
                 string alarmName = Console.ReadLine();
                 Random random = new Random();
                 int randomId = random.Next(10000000, 99999999);
@@ -29,15 +59,15 @@ while (true)
                 bool res = AddAlarm(newAlarm);
                 if (res)
                 {
-                    Console.WriteLine("The alarm was added sucessfully");
+                    Console.WriteLine("\nThe alarm was added sucessfully");
                 }
                 else
                 {
-                    Console.WriteLine("Error adding the alarm");
+                    Console.WriteLine("\nError adding the alarm");
                 }
                 break;
             case 3:
-                Console.Write("Enter the Id of the alarm you want to update: ");
+                Console.Write("\nEnter the Id of the alarm you want to update: ");
                 int id = Convert.ToInt32(Console.ReadLine());
                 Console.Write("Enter the new name: ");
                 string name = Console.ReadLine();
@@ -49,28 +79,28 @@ while (true)
                 bool updateRes = UpdateAlarm(updatedAlarm);
                 if (updateRes)
                 {
-                    Console.WriteLine("The alarm was updated sucessfully");
+                    Console.WriteLine("\nThe alarm was updated sucessfully");
                 }
                 else
                 {
-                    Console.WriteLine("Error updating the alarm");
+                    Console.WriteLine("\nError updating the alarm");
                 };
                 break;
             case 4:
-                Console.Write("Enter the Id of the alarm you want to delete: ");
+                Console.Write("\nEnter the Id of the alarm you want to delete: ");
                 int deletetionId = Convert.ToInt32(Console.ReadLine());
                 bool deleteRes = DeleteAlarm(deletetionId);
                 if (deleteRes)
                 {
-                    Console.WriteLine("The alarm was deleted sucessfully");
+                    Console.WriteLine("\nThe alarm was deleted sucessfully");
                 }
                 else
                 {
-                    Console.WriteLine("Error deleting the alarm");
+                    Console.WriteLine("\nError deleting the alarm");
                 }
                 break;
             default:
-                Console.WriteLine("Enter a valid value between (1-4)");
+                Console.WriteLine("\nEnter a valid value between (1-4)");
                 break;
 
         }

@@ -17,7 +17,7 @@ public partial class SecondaryContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=.\\Server2\\Database\\secondary.sqlite");
+        optionsBuilder.UseSqlite("Data Source=C:\\Users\\INARK12\\OneDrive - ABB\\Documents\\SQLiteReplicatonDemo\\SQLiteReplicaServer2\\Server2\\Database\\secondary.sqlite");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
